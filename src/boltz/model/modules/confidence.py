@@ -310,7 +310,7 @@ class ConfidenceModule(nn.Module):
             s = s_t
             z = z_t
 
-        out_dict = {}
+        out_dict = {'s_conf': s}
 
         # confidence heads
         out_dict.update(
