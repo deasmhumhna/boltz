@@ -320,7 +320,7 @@ class Boltz1(LightningModule):
                     s, z = pairformer_module(s, z, mask=mask, pair_mask=pair_mask)
 
             pdistogram = self.distogram_module(z)
-            dict_out = {"pdistogram": pdistogram}
+            dict_out = {"pdistogram": pdistogram, "s_trunk": s}
 
         # Compute structure module
         if self.training and self.structure_prediction_training:
