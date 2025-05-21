@@ -223,6 +223,16 @@ class BoltzWriter(BasePredictionWriter):
                     )
                     np.savez_compressed(path, pde=pde.cpu().numpy())
 
+                # save the embeddings
+                if "s_trunk" in prediction and "s_conf" in prediction:
+                    s_trunk = prediction['s_trunk'][model_idx]
+                    s_conf = prediction['s_conf'][model_idx]
+                    path = (
+                        struct_dir
+                        / f"s_model_{idx_to_rank[model_idx]}.npz"
+                    )
+                    np.savez_compressed(path, s_trunk=s_trunk.cpu().numpy(), s_conf=s_conf.cpu().numpy())
+
     def on_predict_epoch_end(
         self,
         trainer: Trainer,  # noqa: ARG002
